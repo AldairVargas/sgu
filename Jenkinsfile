@@ -38,7 +38,10 @@ pipeline {
 
     stage('Construyendo y desplegando') {
       steps {
-        sh 'docker compose up --build -d'
+        // Damos permisos de ejecución y corremos el script de setup
+        // Este script se encarga de crear redes, volúmenes y certificados SSL
+        sh 'chmod +x setup_docker.sh'
+        sh './setup_docker.sh'
       }
     }
   }
